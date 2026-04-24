@@ -7,21 +7,23 @@ namespace Wizualne_Lab6
             InitializeComponent();
         }
 
-        int x = 3;
-        int y = 4;
-        int hyr = 1;
-        int sz = 0;
-        int time = 37;
+        int xVal = 3;
+        int yVal = 4;
+        int hyrVal = 1;
+        int szVal = 2;
+        int krokVal = 0;
+        int timeVal = 37;
 
-        public Form1(int x, int y, int hyr, int sz, int time)
+        public Form1(int x, int y, int hyr, int sz, int time, int krok)
         {
             InitializeComponent();
 
-            this.x = x;
-            this.y = y;
-            this.hyr = hyr;
-            this.sz = sz;
-            this.time = time;
+            this.xVal = x;
+            this.yVal = y;
+            this.hyrVal = hyr;
+            this.szVal = sz;
+            this.krokVal = krok;
+            this.timeVal = time;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -40,7 +42,7 @@ namespace Wizualne_Lab6
             Form3 form3 = new Form3();
             form3.Closed += (s, args) => this.Close();
             form3.Show();
-            form3.createButton(x, y);
+            form3.createButton(xVal, yVal, hyrVal, szVal, timeVal, krokVal);
 
             form3.changePanelSize();
 
