@@ -43,6 +43,7 @@ namespace Wizualne_Lab6
 
         public void game(int hyr, int sz, int time, int krok, int x, int y)
         {
+            int startTime = time;
             int points = 0;
             label2.Text = time.ToString() + "s";
             System.Timers.Timer timer = new System.Timers.Timer(1000);
@@ -100,7 +101,17 @@ namespace Wizualne_Lab6
                         {
                             timer.Stop();
                             generate.Stop();
+                            
                             MessageBox.Show("Wygrałeś!\n Liczba punktów: " + points);
+                            int punkty = int.Parse(label2.Text.Replace("s", ""));
+                            punkty = startTime - punkty;
+
+                            save(points, punkty.ToString() + "s");
+
+                            Form1 form1 = new Form1();
+                            this.Hide();
+                            form1.Closed += (s, args) => this.Close();
+                            form1.ShowDialog();
                         }
                     };
                     timer1.Elapsed += (s1, e1) =>
@@ -139,6 +150,11 @@ namespace Wizualne_Lab6
                         generate.Stop();
                         timer.Stop();
                         MessageBox.Show("Przegrałeś!");
+
+                        Form1 form1 = new Form1();
+                        this.Hide();
+                        form1.Closed += (s, args) => this.Close();
+                        form1.ShowDialog();
                     };
                     timer3.Elapsed += (s3, e3) =>
                     {
@@ -150,6 +166,22 @@ namespace Wizualne_Lab6
             };
             generate.Start();
         }
+
+        private void save(int points, string time)
+        {
+            var curentDirectory = Directory.GetCurrentDirectory();
+            
+            ExportToCSV(points, time, curentDirectory + "/data.csv");
+        }
+
+        private void ExportToCSV(int points, string time, string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine($"{points},{time}");
+            }
+        }
+
 
         public void changePanelSize()
         {

@@ -58,7 +58,15 @@ namespace Wizualne_Lab6
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form4 form4 = new Form4();
+            form4.Closed += (s, args) => this.Close();
+            form4.Show();
         }
     }
 }
